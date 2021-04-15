@@ -16,7 +16,6 @@ const App = () => {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      console.log(user)
       setUser(user);
     }
   });
@@ -24,7 +23,7 @@ const App = () => {
   useEffect(() => {
     if (user && user.uid) {
       const tasksRef = firebase.database().ref('tasks/' + user.uid);
-      const notesRef = firebase.database().ref('notes/' + user.id);
+      const notesRef = firebase.database().ref('notes/' + user.uid);
 
       tasksRef.on('value', (snapshot) => {
         let tasks = snapshot.val();
@@ -39,14 +38,11 @@ const App = () => {
       });
       notesRef.on('value', (snapshot) => {
         let notes = snapshot.val();
-        let newState = [];
-        for (let note in notes) {
-          newState.push({
-            id: note,
-            value: notes[note].value
-          });
+        if (!!!notes) {
+          notes = "";
         }
-        setNotes(newState);
+        console.log(notes);
+        setNotes(notes);
       });
     }
   }, [user]);
@@ -74,7 +70,7 @@ const App = () => {
               <TaskItem key={task.id} user={user} taskId={task.id} taskTitle={task.title} />
             ))}
           </Box>
-          <Notes notes={notes} setNotes={setNotes} />
+          <Notes notes={notes} setNotes={setNotes} user={user} />
         </>
       ) : (
         <Button onClick={login} color="primary">Login</Button>

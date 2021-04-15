@@ -1,8 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import firebase from 'firebase';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
-// import Button from '@material-ui/core/Button';
 
 const Notes = (props) => {
   const { user, notes, setNotes } = props;
@@ -11,10 +10,9 @@ const Notes = (props) => {
     event.preventDefault();
     setNotes(event.target.notesValue);
     const notesRef = firebase.database().ref('notes/' + user.uid);
-    const note = {
-      value: notes,
-    }
-    notesRef.push(note);
+    console.log(notesRef.child(user.uid))
+    notesRef.child(user.uid).set({ notes: event.target.notesValue }).then().catch();
+    // notesRef.push({notes: ""});
   }
 
   return (
