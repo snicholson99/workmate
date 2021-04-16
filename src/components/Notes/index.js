@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 
 const Notes = (props) => {
@@ -11,17 +10,14 @@ const Notes = (props) => {
   }
 
   return (
-    <Box display="flex" flexDirection="row" padding="20px" width="100%" justifyContent="center">
-      <TextField
-        name="notes"
-        value={notes}
-        onChange={e => updateNotes(e)}
-        label="Notes"
-        variant="outlined"
-        multiline
-        rows={4}
-      />
-    </Box>
+    <TextField
+      name="notes"
+      value={notes}
+      onChange={e => updateNotes(e)}
+      label="Notes"
+      variant="outlined"
+      multiline
+    />
   );
 }
 

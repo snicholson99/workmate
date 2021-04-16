@@ -41,7 +41,6 @@ const App = () => {
         if (!!!notes) {
           notes = "";
         }
-        console.log(notes);
         setNotes(notes);
       });
     }
@@ -63,15 +62,19 @@ const App = () => {
     <div className="App">
       <Header user={user} logout={logout} />
       {user ? (
-        <>
-          <TaskForm user={user} />
-          <Box id="task-list" display="flex" padding="30px 20px">
-            {tasks.map(task => (
-              <TaskItem key={task.id} user={user} taskId={task.id} taskTitle={task.title} />
-            ))}
+        <Box display="flex" width="100%">
+          <Box id="section-one" className="section">
+            <TaskForm user={user} />
+            <Box id="task-list" display="flex" flexDirection="column" padding="30px 20px">
+              {tasks.map(task => (
+                <TaskItem key={task.id} user={user} taskId={task.id} taskTitle={task.title} />
+                ))}
+            </Box>
           </Box>
-          <Notes notes={notes} setNotes={setNotes} user={user} />
-        </>
+          <Box id="section-two" className="section">
+            <Notes notes={notes} setNotes={setNotes} user={user} />
+          </Box>
+        </Box>
       ) : (
         <Button onClick={login} color="primary">Login</Button>
       )}

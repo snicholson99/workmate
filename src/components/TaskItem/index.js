@@ -26,7 +26,7 @@ const TaskItem = (props) => {
   }
 
   return (
-    <Card id={`task-item-${taskId}`} className={`${classes.root} task-item`}>
+    <Card id={`task-item-${taskId}`} className={`${classes.root} task-item`} variant="outlined">
       <Box display="flex" alignItems="center" justifyContent="space-around" padding="20px">
         <Typography variant="body1">{taskTitle}</Typography>
         <Button onClick={() => removeTask(taskId)} color="primary">

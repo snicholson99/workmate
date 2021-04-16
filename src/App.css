@@ -1,3 +1,25 @@
-.App {
-  text-align: center;
+#section-one {
+  resize: horizontal;
+  /* background-color: #0F0F0F; */
+  /* border-right: 1px solid rgb(30, 30, 30); */
+  order: 1;
+}
+
+#section-two {
+  /* background-color: #131313; */
+  order: 2;
+}
+
+.section {
+  position: relative;
+  top: 0;
+  overflow: auto;
+  width: 50%;
+  height: calc(100vh - 160px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  flex: 1 1 auto;
 }
