@@ -1,0 +1,51 @@
+header {
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 30px;
+  height: 80px;
+  background-color: #1E1E1E;
+  box-shadow: 2px 2px black;
+  color: #FFF;
+}
+
+header > a {
+  text-decoration: none;
+  color: #FFF;
+}
+
+header #profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header #profile-container img {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+header #profile-container button {
+  margin-top: 4px;
+  cursor: pointer;
+  /* width: 100%; */
+}
+
+header .hover-to-show {
+  transition: 0.2s;
+}
+
+header:not(:hover) .hover-to-show {
+  display: block !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+  border: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}

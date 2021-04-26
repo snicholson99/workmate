@@ -1,7 +1,7 @@
 .react-clock{
   position: absolute;
-  left: calc(50% - 35px);
-  width: 70px;
+  left: calc(50% - 30px);
+  width: 60px;
   opacity: 0.5;
 }
 
@@ -10,6 +10,7 @@
   left: calc(50% - 45px);
   width: 90px;
   text-align: center;
+  font-size: 30px;
 }
 
 

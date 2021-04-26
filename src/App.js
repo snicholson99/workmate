@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 
 import './App.css';
 import firebase, { auth, provider } from './firebase.js';
@@ -13,6 +11,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -23,28 +22,24 @@ const App = () => {
   useEffect(() => {
     if (user && user.uid) {
       const tasksRef = firebase.database().ref('tasks/' + user.uid);
-      const notesRef = firebase.database().ref('notes/' + user.uid);
-
       tasksRef.on('value', (snapshot) => {
         let tasks = snapshot.val();
         let newState = [];
         for (let task in tasks) {
           newState.push({
             id: task,
-            title: tasks[task].title
+            title: tasks[task].title,
+            notes: tasks[task].notes ? tasks[task].notes : "",
           });
         }
-        setTasks(newState);
-      });
-      notesRef.on('value', (snapshot) => {
-        let notes = snapshot.val();
-        if (!!!notes) {
-          notes = "";
+        if (selectedTaskId) {
+          const selectedTask = newState.find(({ id }) => id === selectedTaskId );
+          if (selectedTask) { setNotes(selectedTask.notes); }
         }
-        setNotes(notes);
+        setTasks(newState.reverse());
       });
     }
-  }, [user]);
+  }, [user, selectedTaskId]);
 
   const login = () => {
     auth.signInWithPopup(provider)
@@ -62,21 +57,29 @@ const App = () => {
     <div className="App">
       <Header user={user} logout={logout} />
       {user ? (
-        <Box display="flex" width="100%">
-          <Box id="section-one" className="section">
+        <div className="page">
+          <div id="section-one" className="section">
+            <h2>Tasks</h2>
             <TaskForm user={user} />
-            <Box id="task-list" display="flex" flexDirection="column" padding="30px 20px">
+            <div id="task-list">
               {tasks.map(task => (
-                <TaskItem key={task.id} user={user} taskId={task.id} taskTitle={task.title} />
-                ))}
-            </Box>
-          </Box>
-          <Box id="section-two" className="section">
-            <Notes notes={notes} setNotes={setNotes} user={user} />
-          </Box>
-        </Box>
+                <TaskItem onClick={() => setSelectedTaskId(task.id)} selected={selectedTaskId === task.id} key={task.id} user={user} taskId={task.id} taskTitle={task.title} />
+              ))}
+            </div>
+          </div>
+          <div id="section-two" className="section">
+            <label htmlFor="notes"><h2>Notes</h2></label>
+            {selectedTaskId ? (
+              <Notes notes={notes} setNotes={setNotes} user={user} selectedTaskId={selectedTaskId} />
+            ) : (
+              <p>Select a task to view notes.</p>
+            )}
+          </div>
+        </div>
       ) : (
-        <Button onClick={login} color="primary">Login</Button>
+        <div className="page">
+          <button onClick={login} color="primary">Login</button>
+        </div>
       )}
     </div>
   );

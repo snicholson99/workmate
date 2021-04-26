@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import Typography from '@material-ui/core/Typography';
 import Clock from 'react-clock';
 import 'react-clock/dist/Clock.css';
 
-import './index.css';
+import './style.css';
  
 const MyClock = (props) => {
   const { type } = props;
@@ -28,12 +27,12 @@ const MyClock = (props) => {
   }
   if (type === "analog") {
     // return <Clock value={value} size={90} renderSecondHand={false} />;
-    return <Clock value={value} size={70} renderSecondHand={false} />;
+    return <Clock value={value} size={60} renderSecondHand={false} />;
   }
   return (
-    <Typography id="digital-clock" variant="h4">
+    <h4 id="digital-clock">
       {checkTime(value.getHours())}:{checkTime(value.getMinutes())}
-    </Typography>
+    </h4>
   );
  
   

@@ -1,25 +1,46 @@
+.page {
+  display: flex;
+  color: #FFF;
+  background-color: #0F0F0F;
+  height: calc(100vh - 100px);
+  position: relative;
+  top: 0;
+}
+
+.page > button {
+  position: relative;
+  align-self: center;
+  width: 50px;
+  left: calc(50% - (50px / 2));
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
 #section-one {
   resize: horizontal;
-  /* background-color: #0F0F0F; */
+  background-color: #0F0F0F;
   /* border-right: 1px solid rgb(30, 30, 30); */
   order: 1;
 }
 
 #section-two {
-  /* background-color: #131313; */
+  background-color: #131313;
   order: 2;
 }
 
 .section {
-  position: relative;
-  top: 0;
   overflow: auto;
   width: 50%;
-  height: calc(100vh - 160px);
-  padding: 20px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  align-items: center;
+  /* align-items: center; */
   flex: 1 1 auto;
+}
+
+#task-list {
+  overflow: auto;
 }

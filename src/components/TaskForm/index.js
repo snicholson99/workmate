@@ -1,8 +1,7 @@
 import { useState } from "react";
 import firebase from 'firebase';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+
+import './style.css';
 
 const TaskForm = (props) => {
   const { user } = props;
@@ -16,23 +15,21 @@ const TaskForm = (props) => {
     const tasksRef = firebase.database().ref('tasks/' + user.uid);
     const task = {
       title: taskTitle,
+      notes: "",
     }
     tasksRef.push(task);
     setTaskTitle('');
   }
 
   return (
-    <form className="task-form" onSubmit={createTask}>
-      <Box display="flex" flexDirection="row" padding="20px" width="100%" justifyContent="center">
-        <TextField
-          name="taskTitle"
-          value={taskTitle}
-          onChange={e => setTaskTitle(e.target.value)}
-          label="Task Title"
-          variant="outlined"
-          />
-        <Button type="submit" color="primary">Submit</Button>
-      </Box>
+    <form id="task-form" onSubmit={createTask}>
+      <input
+        name="taskTitle"
+        value={taskTitle}
+        placeholder="Task Name"
+        onChange={e => setTaskTitle(e.target.value)}
+      />
+      <button type="submit" color="primary">Create Task</button>
     </form>
   );
 }

@@ -1,0 +1,43 @@
+#notes {
+  height: 100%;
+  width: 100%;
+  background-color: #1e1e1e;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  color: #fff;
+}
+
+.notes-copy-flex-container {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.notes-copy-inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #A4A4A4;
+}
+
+.notes-copy-inner-container:hover {
+  color: white;
+}
+
+.notes-copy-icon,
+.notes-copy-label {
+  margin: 0 2px;
+}
+
+.notes-copied-text {
+  margin: 10px;
+  color: lightgrey;
+}
+
+.notes-copied-text > span {
+  font-style: italic;
+}
