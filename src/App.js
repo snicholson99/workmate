@@ -30,6 +30,7 @@ const App = () => {
             id: task,
             title: tasks[task].title,
             notes: tasks[task].notes ? tasks[task].notes : "",
+            completed: tasks[task].completed ? tasks[task].completed : false,
           });
         }
         if (selectedTaskId) {
@@ -51,6 +52,9 @@ const App = () => {
 
   const logout = () => {
     auth.signOut().then(() => setUser(null));
+    setTasks([]);
+    setNotes([]);
+    setSelectedTaskId(null);
   }
 
   return (
@@ -63,14 +67,17 @@ const App = () => {
             <TaskForm user={user} />
             <div id="task-list">
               {tasks.map(task => (
-                <TaskItem onClick={() => setSelectedTaskId(task.id)} selected={selectedTaskId === task.id} key={task.id} user={user} taskId={task.id} taskTitle={task.title} />
+                <TaskItem onSelect={() => setSelectedTaskId(task.id)} selected={selectedTaskId === task.id} isComplete={task.completed} key={task.id} user={user} taskId={task.id} taskTitle={task.title} />
               ))}
             </div>
           </div>
           <div id="section-two" className="section">
             <label htmlFor="notes"><h2>Notes</h2></label>
             {selectedTaskId ? (
-              <Notes notes={notes} setNotes={setNotes} user={user} selectedTaskId={selectedTaskId} />
+              <>
+                <span id="notes-close-icon" onClick={() => setSelectedTaskId("")}>✕</span>
+                <Notes notes={notes} setNotes={setNotes} user={user} selectedTaskId={selectedTaskId} />
+              </>
             ) : (
               <p>Select a task to view notes.</p>
             )}

@@ -1,6 +1,6 @@
 .task-item {
   width: 100%;
-  background-color: rgb(164, 164, 164);
+  background-color: #A4A4A4;
   padding: 20px;
   cursor: pointer;
   color: #000000;
@@ -9,21 +9,36 @@
   justify-content: space-between;
 }
 
+.task-item-button-container {
+  display: flex;
+  padding-left: 10px;
+}
+
 .task-item button {
   height: 100%;
   display: flex;
   align-items: center;
   padding: 4px 8px;
-}
-
-.task-item button:hover {
-  background-color: red;
   border-color: transparent;
+  margin: 2px;
   border-radius: 2px;
 }
 
-.task-item:not(first-child):not(.selected + .task-item) {
+.task-item button:hover {
+  opacity: 0.8;
+}
+
+.task-item .task-item-delete-button:hover {
+  background-color: red;
+}
+
+.task-item:not(first-child),
+.task-item:not(.selected + .task-item) {
   border-top: 1px solid #000;
+}
+
+.task-item.complete .task-item-complete-button {
+  background-color: green;
 }
 
 .task-item.selected {

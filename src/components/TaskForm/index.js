@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import firebase from 'firebase';
 
 import './style.css';
@@ -29,7 +29,7 @@ const TaskForm = (props) => {
         placeholder="Task Name"
         onChange={e => setTaskTitle(e.target.value)}
       />
-      <button type="submit" color="primary">Create Task</button>
+      <button type="submit" color="primary">Create</button>
     </form>
   );
 }

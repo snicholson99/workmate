@@ -2,7 +2,11 @@ import firebase from '../../firebase.js';
 import './style.css';
 
 const TaskItem = (props) => {
-  const { user, taskId, taskTitle, selected, onClick } = props;
+  const { user, taskId, taskTitle, selected, onSelect, isComplete } = props;
+
+  const updateIsComplete = (value) => {
+    firebase.database().ref('tasks/' + user.uid).child(taskId).update({ completed: value });
+  }
 
   const removeTask = (taskId) => {
     if (window.confirm("Are you sure you want to task this record? This cannot be reverted.")) {
@@ -12,11 +16,16 @@ const TaskItem = (props) => {
   }
 
   return (
-    <div id={`task-item-${taskId}`} className={`task-item ${selected ? "selected" : ""}`} onClick={() => onClick(taskId)}>
+    <div id={`task-item-${taskId}`} className={`task-item ${selected ? "selected" : ""} ${isComplete ? "complete" : ""}`} onClick={() => onSelect(taskId)}>
       <p>{taskTitle}</p>
-      <button >
-        <i className="fas fa-trash-alt" onClick={() => removeTask(taskId)} alt="delete"></i>
-      </button>
+      <div className="task-item-button-container">
+        <button className="task-item-complete-button" onClick={() => updateIsComplete(!isComplete)}>
+          <i className="fas fa-check"></i>
+        </button>
+        <button className="task-item-delete-button" onClick={() => removeTask(taskId)}>
+          <i className="fas fa-trash-alt"></i>
+        </button>
+      </div>
     </div>
   );
 }

@@ -44,3 +44,11 @@ h2 {
 #task-list {
   overflow: auto;
 }
+
+#notes-close-icon {
+  position: absolute;
+  top: 38px;
+  right: 40px;
+  cursor: pointer;
+  color: #A4A4A4;
+}
