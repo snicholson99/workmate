@@ -1,9 +1,8 @@
 .task-item {
   width: 100%;
-  background-color: #A4A4A4;
-  padding: 20px;
+  background-color: #383838;
+  padding: 24px;
   cursor: pointer;
-  color: #000000;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,10 +21,7 @@
   border-color: transparent;
   margin: 2px;
   border-radius: 2px;
-}
-
-.task-item button:hover {
-  opacity: 0.8;
+  background-color: #6d6d6d;
 }
 
 .task-item .task-item-delete-button:hover {
@@ -42,6 +38,6 @@
 }
 
 .task-item.selected {
-  padding: 18px;
+  padding: 22px;
   border: 2px solid rgb(154, 255, 38) !important;
 }

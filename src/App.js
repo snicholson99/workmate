@@ -34,7 +34,7 @@ const App = () => {
           });
         }
         if (selectedTaskId) {
-          const selectedTask = newState.find(({ id }) => id === selectedTaskId );
+          const selectedTask = newState.find(({ id }) => id === selectedTaskId);
           if (selectedTask) { setNotes(selectedTask.notes); }
         }
         setTasks(newState.reverse());
@@ -51,10 +51,12 @@ const App = () => {
   }
 
   const logout = () => {
-    auth.signOut().then(() => setUser(null));
-    setTasks([]);
-    setNotes([]);
-    setSelectedTaskId(null);
+    auth.signOut().then(() => {
+      setUser(null)
+      setTasks([]);
+      setNotes([]);
+      setSelectedTaskId(null);
+    });
   }
 
   return (
@@ -67,19 +69,33 @@ const App = () => {
             <TaskForm user={user} />
             <div id="task-list">
               {tasks.map(task => (
-                <TaskItem onSelect={() => setSelectedTaskId(task.id)} selected={selectedTaskId === task.id} isComplete={task.completed} key={task.id} user={user} taskId={task.id} taskTitle={task.title} />
+                <TaskItem
+                  key={task.id}
+                  taskId={task.id}
+                  taskTitle={task.title}
+                  isComplete={task.completed}
+                  selected={selectedTaskId === task.id}
+                  user={user}
+                  setSelectedTaskId={() => setSelectedTaskId(task.id)}
+                />
               ))}
             </div>
           </div>
           <div id="section-two" className="section">
-            <label htmlFor="notes"><h2>Notes</h2></label>
             {selectedTaskId ? (
               <>
-                <span id="notes-close-icon" onClick={() => setSelectedTaskId("")}>✕</span>
+                <div id="notes-header">
+                  <label htmlFor="notes"><h2>Notes</h2></label>
+                  <span id="notes-close-icon" onClick={() => setSelectedTaskId(null)}>✕</span>
+                </div>
+                <p id="notes-subheading">{tasks.find(({ id }) => id === selectedTaskId)?.title}</p>
                 <Notes notes={notes} setNotes={setNotes} user={user} selectedTaskId={selectedTaskId} />
               </>
             ) : (
-              <p>Select a task to view notes.</p>
+              <>
+                <h2>Notes</h2>
+                <p id="notes-unselected-text">Select a task to view notes.</p>
+              </>
             )}
           </div>
         </div>

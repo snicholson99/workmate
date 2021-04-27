@@ -20,6 +20,18 @@ body, h1, h2, h3, h4, h5, h6, p, span, ul, li, a {
   margin: 0;
 }
 
+button {
+  padding: 2px 12px;
+  white-space: nowrap;
+  background-color: #383838;
+  color: #FFF;
+  border: transparent;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
 button, a {
   cursor: pointer;
 }
